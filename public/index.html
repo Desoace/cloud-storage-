@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dhruv. — Secure File Vault</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="noise"></div>
+<div class="grid-bg"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div id="toast" class="toast"></div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="navbar" id="navbar">
+  <div class="logo">
+    <span class="logo-hex">⬡</span>
+    <span class="logo-name">dhruv<span class="logo-dot">.</span></span>
+    <span class="logo-tag">vault</span>
+  </div>
+  <div class="nav-center">
+    <span class="nav-status"><span class="status-dot"></span>All systems online</span>
+  </div>
+  <div class="nav-right">
+    <span class="nav-time" id="navTime"></span>
+    <a href="#upload" class="nav-link">Upload</a>
+    <a href="dashboard.html" class="nav-link nav-link-cta">Dashboard →</a>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero">
+  <div class="hero-eyebrow">
+    <span class="eyebrow-pill">AES-256 Encrypted</span>
+    <span class="eyebrow-pill">Zero-Log</span>
+    <span class="eyebrow-pill">Auto-Expiry</span>
+    <span class="eyebrow-pill">Auto-Scaling</span>
+  </div>
+  <h1 class="hero-title">
+    <span class="line-reveal" style="--d:0ms">Drop files.</span><br>
+    <span class="line-reveal accent glitch" data-text="Lock them down." style="--d:150ms">Lock them down.</span><br>
+    <span class="line-reveal muted-title" style="--d:300ms">Share safely.</span>
+  </h1>
+  <p class="hero-sub line-reveal" style="--d:450ms">
+    Military-grade encryption, self-destruct timers, and elastic autoscaling — all in one vault built by Dhruv.
+  </p>
+  <div class="hero-cta line-reveal" style="--d:550ms">
+    <a href="#upload" class="btn btn-primary hero-btn">Start Uploading <span>↓</span></a>
+    <a href="#about" class="btn btn-ghost">Learn More</a>
+  </div>
+  <div class="hero-scroll">↓ scroll</div>
+</section>
+
+<!-- ═══════════ MARQUEE ═══════════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>AES-256-CBC</span><span class="mx">✦</span>
+    <span>End-to-End Encrypted</span><span class="mx">✦</span>
+    <span>Auto-Scaling Infrastructure</span><span class="mx">✦</span>
+    <span>Bcrypt Password Hashing</span><span class="mx">✦</span>
+    <span>JWT Auth</span><span class="mx">✦</span>
+    <span>Self-Destruct Timers</span><span class="mx">✦</span>
+    <span>Zero Knowledge</span><span class="mx">✦</span>
+    <span>Stream Encryption</span><span class="mx">✦</span>
+    <span>AES-256-CBC</span><span class="mx">✦</span>
+    <span>End-to-End Encrypted</span><span class="mx">✦</span>
+    <span>Auto-Scaling Infrastructure</span><span class="mx">✦</span>
+    <span>Bcrypt Password Hashing</span><span class="mx">✦</span>
+    <span>JWT Auth</span><span class="mx">✦</span>
+    <span>Self-Destruct Timers</span><span class="mx">✦</span>
+    <span>Zero Knowledge</span><span class="mx">✦</span>
+    <span>Stream Encryption</span><span class="mx">✦</span>
+  </div>
+</div>
+
+<!-- ═══════════ ABOUT / DESCRIPTION ═══════════ -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="section-label"><span class="label-num">ABOUT</span> The Builder</div>
+        <h2 class="section-heading">Built by Dhruv.<br>For people who care<br><span class="accent">about privacy.</span></h2>
+      </div>
+      <div class="about-right">
+        <p class="about-body">
+          This vault started as a personal project — a frustration with file-sharing tools that log everything, keep your data forever, and hide their encryption behind vague marketing.
+        </p>
+        <p class="about-body">
+          So I built my own. Every file that passes through <strong>dhruv.vault</strong> is encrypted with a unique AES-256 key before it even touches disk. The key is never stored alongside the file in plaintext. Passwords are hashed with bcrypt. Tokens are signed with JWT. Files delete themselves.
+        </p>
+        <p class="about-body">
+          The backend is written in Node.js, handles streaming encryption so even massive files don't blow memory, and auto-scales servers when traffic picks up. No third-party clouds. No analytics. No ads.
+        </p>
+        <div class="about-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">AES-256</span>
+          <span class="tag">bcrypt</span>
+          <span class="tag">JWT</span>
+          <span class="tag">Multer</span>
+          <span class="tag">Stream API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ HOW IT WORKS ═══════════ -->
+<section class="section section-dark" id="how">
+  <div class="section-inner">
+    <div class="section-label centered"><span class="label-num">HOW</span> It Works</div>
+    <h2 class="section-heading centered">From upload to<br><span class="accent">encrypted vault</span> in seconds.</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon">🔐</div>
+        <div class="step-title">Authenticate</div>
+        <div class="step-desc">Sign in with your credentials. The server issues a signed JWT token that proves your identity on every request — no sessions, no cookies.</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step reveal" style="--ri:1">
+        <div class="step-num">02</div>
+        <div class="step-icon">📤</div>
+        <div class="step-title">Drop Your File</div>
+        <div class="step-desc">Drag and drop or browse. Set an optional passphrase and pick a self-destruct timer. The file is streamed directly into the encryption pipeline.</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step reveal" style="--ri:2">
+        <div class="step-num">03</div>
+        <div class="step-icon">⚙️</div>
+        <div class="step-title">Encrypt on the Fly</div>
+        <div class="step-desc">A random 256-bit key and 128-bit IV are generated just for your file. AES-256-CBC encrypts it as it streams. The original is wiped immediately after.</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step reveal" style="--ri:3">
+        <div class="step-num">04</div>
+        <div class="step-icon">🔗</div>
+        <div class="step-title">Share the Link</div>
+        <div class="step-desc">You get a unique URL. Anyone with the link (and passphrase, if set) can decrypt and view the file — until the timer runs out and it self-destructs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ENCRYPTION DEEP DIVE ═══════════ -->
+<section class="section" id="encryption">
+  <div class="section-inner">
+    <div class="section-label centered"><span class="label-num">TECH</span> Encryption</div>
+    <h2 class="section-heading centered">Military-grade.<br><span class="accent">Zero compromises.</span></h2>
+    <div class="enc-grid">
+      <div class="enc-card reveal">
+        <div class="enc-icon">🔑</div>
+        <div class="enc-label">AES-256-CBC</div>
+        <div class="enc-desc">The same standard used by governments and banks. Each file gets its own key — compromising one file reveals nothing about others.</div>
+        <div class="enc-detail">
+          <span class="code-pill">32-byte key</span>
+          <span class="code-pill">16-byte IV</span>
+          <span class="code-pill">crypto.randomBytes()</span>
+        </div>
+      </div>
+      <div class="enc-card reveal" style="--ri:1">
+        <div class="enc-icon">🧂</div>
+        <div class="enc-label">Bcrypt Hashing</div>
+        <div class="enc-desc">File passwords aren't stored as-is. They're run through bcrypt with a salt factor of 10 — making brute-force attacks computationally impractical.</div>
+        <div class="enc-detail">
+          <span class="code-pill">saltRounds: 10</span>
+          <span class="code-pill">bcrypt.hash()</span>
+          <span class="code-pill">bcrypt.compare()</span>
+        </div>
+      </div>
+      <div class="enc-card reveal" style="--ri:2">
+        <div class="enc-icon">🪪</div>
+        <div class="enc-label">JWT Tokens</div>
+        <div class="enc-desc">Authentication uses signed JSON Web Tokens — stateless, verifiable, and expiry-capable. No session state on the server side.</div>
+        <div class="enc-detail">
+          <span class="code-pill">jsonwebtoken</span>
+          <span class="code-pill">HS256</span>
+          <span class="code-pill">jwt.verify()</span>
+        </div>
+      </div>
+      <div class="enc-card reveal" style="--ri:3">
+        <div class="enc-icon">🌊</div>
+        <div class="enc-label">Stream Encryption</div>
+        <div class="enc-desc">Files are piped directly through the cipher — never fully loaded into memory. This means even 2GB files encrypt without crashing the server.</div>
+        <div class="enc-detail">
+          <span class="code-pill">createReadStream()</span>
+          <span class="code-pill">.pipe(cipher)</span>
+          <span class="code-pill">zero buffering</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ AUTOSCALING ═══════════ -->
+<section class="section section-dark" id="scaling">
+  <div class="section-inner">
+    <div class="autoscale-layout">
+      <div class="autoscale-left">
+        <div class="section-label"><span class="label-num">INFRA</span> Autoscaling</div>
+        <h2 class="section-heading">Scales up when<br>things get<br><span class="accent">busy.</span></h2>
+        <p class="about-body">The server watches active user load in real time. Every 2 uploads, if users exceed the server capacity threshold, a new server instance spins up automatically.</p>
+        <p class="about-body">This is horizontal scaling in its simplest form — built from scratch, no Kubernetes, no AWS. Just logic.</p>
+        <div class="scale-code">
+          <div class="code-line"><span class="c-kw">if</span> (activeUsers &gt; servers * <span class="c-num">2</span>) {</div>
+          <div class="code-line indent"><span class="c-var">servers</span>++;</div>
+          <div class="code-line">}</div>
+        </div>
+      </div>
+      <div class="autoscale-right">
+        <div class="scale-visual" id="scaleVisual">
+          <div class="scale-label-top">Server Load Simulation</div>
+          <div class="scale-bars" id="scaleBars"></div>
+          <div class="scale-servers" id="scaleServers"></div>
+          <div class="scale-label-bot" id="scaleStatus">Monitoring…</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ DATA HANDLING ═══════════ -->
+<section class="section" id="data">
+  <div class="section-inner">
+    <div class="section-label centered"><span class="label-num">DATA</span> Handling</div>
+    <h2 class="section-heading centered">What happens to<br><span class="accent">your file.</span></h2>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-title">File received via Multer</div>
+          <div class="tl-desc">The raw upload lands in <span class="mono-inline">uploads/</span> as a temp file with a safe, timestamp-prefixed name. Original filename is preserved in metadata only.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal" style="--ri:1">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-title">Streamed through AES cipher</div>
+          <div class="tl-desc">A fresh key and IV are generated. The temp file is piped through <span class="mono-inline">createCipheriv</span> into a <span class="mono-inline">.enc</span> file. No full-file memory load.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal" style="--ri:2">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-title">Temp file wiped</div>
+          <div class="tl-desc">Immediately after encryption finishes, <span class="mono-inline">fs.unlinkSync(tempPath)</span> removes the plaintext original. Only the <span class="mono-inline">.enc</span> remains.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal" style="--ri:3">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-title">Metadata stored as JSON</div>
+          <div class="tl-desc">Key, IV, hashed password, original name, and expiry timestamp are saved in a sidecar <span class="mono-inline">.json</span> file — never in a database.</div>
+        </div>
+      </div>
+      <div class="tl-item reveal" style="--ri:4">
+        <div class="tl-dot danger-dot"></div>
+        <div class="tl-content">
+          <div class="tl-title">Auto-delete on expiry</div>
+          <div class="tl-desc">A background interval runs every 60 seconds, checking every <span class="mono-inline">.json</span> expiry. When time's up, both <span class="mono-inline">.enc</span> and <span class="mono-inline">.json</span> are deleted. Gone forever.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ STATS STRIP ═══════════ -->
+<section class="stats-strip">
+  <div class="stat-big reveal">
+    <div class="stat-big-num accent" id="liveUsers">—</div>
+    <div class="stat-big-label">Active Users</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-big reveal" style="--ri:1">
+    <div class="stat-big-num" id="liveServers">—</div>
+    <div class="stat-big-label">Servers Running</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-big reveal" style="--ri:2">
+    <div class="stat-big-num" id="liveFiles">—</div>
+    <div class="stat-big-label">Encrypted Files</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-big reveal" style="--ri:3">
+    <div class="stat-big-num">256</div>
+    <div class="stat-big-label">Bit Encryption Key</div>
+  </div>
+</section>
+
+<!-- ═══════════ LIVE ENCRYPTION PLAYGROUND ═══════════ -->
+<section class="section" id="playground">
+  <div class="section-inner">
+    <div class="section-label centered"><span class="label-num">LIVE</span> Playground</div>
+    <h2 class="section-heading centered">Real AES-256.<br><span class="accent">Right in your browser.</span></h2>
+    <p class="about-body" style="text-align:center;max-width:520px;margin:0 auto 48px">
+      This isn't a demo — it's actual AES-256-CBC encryption running in your browser using the Web Crypto API. Type anything. Watch it become unreadable. Decrypt it back.
+    </p>
+
+    <div class="playground-card reveal">
+      <div class="pg-left">
+        <div class="pg-panel-label">📝 Plaintext Input</div>
+        <textarea class="pg-input" id="pgInput" placeholder="Type any message here…&#10;&#10;e.g. Hello Dhruv, this is a secret!" spellcheck="false"></textarea>
+        <div class="pg-key-row">
+          <div class="pg-key-block">
+            <div class="pg-key-label">KEY (256-bit)</div>
+            <div class="pg-key-val" id="pgKeyDisplay">—</div>
+          </div>
+          <div class="pg-key-block">
+            <div class="pg-key-label">IV (128-bit)</div>
+            <div class="pg-key-val" id="pgIvDisplay">—</div>
+          </div>
+        </div>
+        <div class="pg-btn-row">
+          <button class="btn btn-primary pg-btn" id="pgEncBtn" onclick="pgEncrypt()">
+            🔐 Encrypt Now
+          </button>
+          <button class="btn btn-ghost pg-btn" id="pgDecBtn" onclick="pgDecrypt()" disabled>
+            🔓 Decrypt
+          </button>
+          <button class="btn btn-ghost pg-btn" onclick="pgReset()">↺ Reset</button>
+        </div>
+      </div>
+
+      <div class="pg-divider">
+        <div class="pg-divider-arrow" id="pgArrow">→</div>
+      </div>
+
+      <div class="pg-right">
+        <div class="pg-panel-label" id="pgOutputLabel">🔒 Encrypted Output (Base64)</div>
+        <div class="pg-output" id="pgOutput">
+          <div class="pg-placeholder">Encrypted bytes will appear here…</div>
+        </div>
+        <div class="pg-stats" id="pgStats"></div>
+      </div>
+    </div>
+
+    <!-- MATRIX RAIN CANVAS (shows during encryption) -->
+    <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+  </div>
+</section>
+
+<!-- ═══════════ UPLOAD (THE APP) ═══════════ -->
+<section class="section section-dark" id="upload">
+  <div class="section-inner">
+    <div class="section-label centered"><span class="label-num">VAULT</span> Upload</div>
+    <h2 class="section-heading centered">Try it right now.<br><span class="accent">Encrypt a file.</span></h2>
+
+    <!-- FLOW EXPLAINER -->
+    <div class="flow-steps">
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-desc">Sign in to prove you're the uploader</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-desc">Drop a file & set a Secret Code</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-desc">Get a link — share link + code</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-desc">Recipient enters code to decrypt</div></div>
+    </div>
+
+    <div class="main-card">
+      <div class="card-orb card-orb-1"></div>
+      <div class="card-orb card-orb-2"></div>
+
+      <!-- LOGIN -->
+      <div class="card-section" id="loginSection">
+        <div class="section-label"><span class="label-num">01</span> Who Are You?</div>
+        <h3 class="card-title">Sign In</h3>
+
+        <div class="why-box">
+          <div class="why-icon">🛡</div>
+          <div class="why-text">
+            <strong>Why sign in?</strong> The vault only lets authenticated users upload. This stops random people from spamming the server with files. Think of it as the front door key.
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Username</label>
+          <div class="input-wrap">
+            <span class="input-icon">◈</span>
+            <input id="username" placeholder="admin" autocomplete="off">
+          </div>
+        </div>
+        <div class="input-group">
+          <label>Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">◉</span>
+            <input id="password" type="password" placeholder="••••••••">
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="login()">
+          <span class="btn-text">Unlock the Vault</span>
+          <span class="btn-arrow">→</span>
+        </button>
+        <div id="loginBadge" class="auth-badge hidden">
+          <span>✓</span> Vault unlocked — ready to upload
+        </div>
+      </div>
+
+      <div class="divider-vert"><div class="divider-label">then</div></div>
+
+      <!-- UPLOAD -->
+      <div class="card-section" id="uploadSection">
+        <div class="section-label"><span class="label-num">02</span> Encrypt a File</div>
+        <h3 class="card-title">Drop It Here</h3>
+
+        <div id="dropZone" class="drop-zone" onclick="document.getElementById('fileInput').click()">
+          <div class="drop-ripple"></div>
+          <div class="drop-icon-wrap"><span>⬆</span></div>
+          <div class="drop-text">Drag & drop or <span class="accent">browse</span></div>
+          <div class="drop-sub">Any file · encrypted on arrival</div>
+        </div>
+        <input type="file" id="fileInput" hidden>
+
+        <div class="file-meta-row" id="fileMeta">
+          <div class="file-meta-icon" id="fileMetaIcon">📄</div>
+          <div class="file-meta-info">
+            <div class="file-meta-name" id="fileMetaName"></div>
+            <div class="file-meta-size" id="fileMetaSize"></div>
+          </div>
+          <button class="file-meta-clear" onclick="clearFile()">✕</button>
+        </div>
+
+        <!-- SECRET CODE — KEY FEATURE -->
+        <div class="secret-code-box">
+          <div class="secret-code-header">
+            <span class="secret-icon">🔐</span>
+            <div>
+              <div class="secret-title">Secret Decryption Code</div>
+              <div class="secret-sub">The person you share the link with will need this exact code to open the file. Without it, the file stays locked forever.</div>
+            </div>
+          </div>
+          <div class="input-wrap">
+            <span class="input-icon">🔑</span>
+            <input id="filePassword" type="text" placeholder="e.g. blueFox92 or leave blank for no lock" autocomplete="off">
+          </div>
+          <div class="secret-hint">💡 Write it down — you won't see it again after uploading.</div>
+        </div>
+
+        <div class="input-group">
+          <label>Self-Destruct Timer</label>
+          <div class="expiry-grid">
+            <label class="expiry-opt"><input type="radio" name="expiry" value="3600000"> 1h</label>
+            <label class="expiry-opt"><input type="radio" name="expiry" value="86400000" checked> 24h</label>
+            <label class="expiry-opt"><input type="radio" name="expiry" value="604800000"> 7d</label>
+            <label class="expiry-opt"><input type="radio" name="expiry" value="2592000000"> 30d</label>
+          </div>
+        </div>
+
+        <div class="progress-wrap" id="progressWrap">
+          <div class="progress-header">
+            <span class="progress-label" id="progressLabel">Encrypting…</span>
+            <span class="progress-pct" id="progressPct">0%</span>
+          </div>
+          <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+        </div>
+
+        <button class="btn btn-primary btn-upload" onclick="uploadFile()">
+          <span class="btn-text">Encrypt & Lock</span>
+          <span class="btn-arrow">🔐</span>
+        </button>
+
+        <!-- ENCRYPTION PROOF PANEL -->
+        <div id="encProof" class="enc-proof">
+          <div class="enc-proof-header">
+            <div class="enc-proof-icon">✅</div>
+            <div>
+              <div class="enc-proof-title">File Successfully Encrypted</div>
+              <div class="enc-proof-sub">Here's proof of what just happened to your file</div>
+            </div>
+          </div>
+
+          <div class="enc-proof-grid">
+            <div class="enc-proof-stat">
+              <div class="eps-label">Algorithm</div>
+              <div class="eps-val">AES-256-CBC</div>
+            </div>
+            <div class="enc-proof-stat">
+              <div class="eps-label">Key Size</div>
+              <div class="eps-val">256-bit</div>
+            </div>
+            <div class="enc-proof-stat">
+              <div class="eps-label">IV Size</div>
+              <div class="eps-val">128-bit</div>
+            </div>
+            <div class="enc-proof-stat">
+              <div class="eps-label">Original Wiped</div>
+              <div class="eps-val green-val">Yes ✓</div>
+            </div>
+          </div>
+
+          <!-- HEX PREVIEW (fake encrypted bytes) -->
+          <div class="enc-hex-label">Encrypted file preview (first 64 bytes)</div>
+          <div class="enc-hex" id="encHex"></div>
+
+          <!-- SECRET CODE REMINDER -->
+          <div id="secretCodeReminder" class="secret-reminder"></div>
+
+          <!-- SHARE LINK -->
+          <div class="share-block">
+            <div class="share-block-label">📎 Shareable Link</div>
+            <div class="share-url" id="shareUrl"></div>
+            <div class="share-actions">
+              <button class="copy-btn" id="copyLinkBtn">⎘ Copy Link</button>
+              <button class="copy-btn" id="copyBothBtn">⎘ Copy Link + Secret Code</button>
+            </div>
+          </div>
+
+          <div class="recipient-instructions">
+            <div class="ri-title">📬 What to tell the recipient</div>
+            <div class="ri-body" id="riBody"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">dhruv<span class="logo-dot">.</span></div>
+      <div class="footer-tagline">Built different. Encrypted by default.</div>
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-col">
+        <div class="footer-col-title">Pages</div>
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#upload">Upload</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Tech</div>
+        <a href="#encryption">Encryption</a>
+        <a href="#scaling">Autoscaling</a>
+        <a href="#data">Data Handling</a>
+        <a href="#how">How It Works</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-line-el"></div>
+    <div class="footer-bottom-row">
+      <span class="footer-mono">AES-256 · bcrypt · JWT · Node.js</span>
+      <span class="footer-mono">Zero logs · Encrypted at rest</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

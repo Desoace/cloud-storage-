@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dhruv. — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+<div class="noise"></div>
+<div class="grid-bg"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<div id="toast" class="toast"></div>
+
+<nav class="navbar scrolled" id="navbar">
+  <div class="logo">
+    <span class="logo-hex">⬡</span>
+    <span class="logo-name">dhruv<span class="logo-dot">.</span></span>
+    <span class="logo-tag">vault</span>
+  </div>
+  <div class="nav-center">
+    <span class="nav-status"><span class="status-dot"></span>All systems online</span>
+  </div>
+  <div class="nav-right">
+    <span class="nav-time" id="navTime"></span>
+    <a href="index.html" class="nav-link">← Upload</a>
+  </div>
+</nav>
+
+<div class="dash-header">
+  <div class="section-label" style="margin-bottom:10px"><span class="label-num">CTRL</span> Panel</div>
+  <h1 class="dash-title">Dashboard<span class="accent">_</span></h1>
+  <p class="dash-sub">Live encrypted file overview and system health.</p>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card" style="--si:0">
+    <div class="stat-label">Active Users</div>
+    <div class="stat-value" id="statUsers">—</div>
+    <div class="stat-bar"><div class="stat-fill" id="fillUsers"></div></div>
+  </div>
+  <div class="stat-card" style="--si:1">
+    <div class="stat-label">Servers Running</div>
+    <div class="stat-value" id="statServers">—</div>
+    <div class="stat-bar"><div class="stat-fill" id="fillServers"></div></div>
+  </div>
+  <div class="stat-card" style="--si:2">
+    <div class="stat-label">Encrypted Files</div>
+    <div class="stat-value" id="statFiles">—</div>
+    <div class="stat-bar"><div class="stat-fill" id="fillFiles"></div></div>
+  </div>
+  <div class="stat-card online-card" style="--si:3">
+    <div class="stat-label">System Health</div>
+    <div class="stat-value online">● ONLINE</div>
+    <div class="stat-sub">All nodes nominal</div>
+    <div class="online-pulse"></div>
+  </div>
+</div>
+
+<div class="dash-grid">
+  <div class="dash-card">
+    <div class="dash-card-header">
+      <div class="dash-card-title">Encrypted Files</div>
+      <div class="dash-card-right"><div class="live-dot"></div><span class="live-label">LIVE</span></div>
+    </div>
+    <div id="fileList" class="file-list">
+      <div class="loading-row"><div class="loading-spinner"></div>Loading…</div>
+    </div>
+  </div>
+  <div class="dash-card">
+    <div class="dash-card-header">
+      <div class="dash-card-title">Activity Log</div>
+      <div class="dash-card-right"><div class="live-dot"></div><span class="live-label">LIVE</span></div>
+    </div>
+    <div id="logList" class="log-list">
+      <div class="loading-row"><div class="loading-spinner"></div>Loading…</div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">dhruv<span class="logo-dot">.</span></div>
+      <div class="footer-tagline">Built different. Encrypted by default.</div>
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-col">
+        <div class="footer-col-title">Pages</div>
+        <a href="index.html">Home</a>
+        <a href="index.html#upload">Upload</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-line-el"></div>
+    <div class="footer-bottom-row">
+      <span class="footer-mono">AES-256 · bcrypt · JWT · Node.js</span>
+      <span class="footer-mono">Auto-refreshes every 3s</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

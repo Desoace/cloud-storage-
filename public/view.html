@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dhruv. — Unlock File</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #06080e;
+  --card:   #0e1320;
+  --border: rgba(0,245,212,0.12);
+  --cyan:   #00f5d4;
+  --cyan-d: rgba(0,245,212,0.1);
+  --text:   #dde4f0;
+  --muted:  #4a5568;
+  --muted2: #718096;
+  --danger: #ff4d6d;
+  --green:  #4ade80;
+  --mono:   'Space Mono', monospace;
+  --sans:   'Sora', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* bg grid */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,245,212,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,245,212,0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* top logo */
+.top-logo {
+  position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+  font-family: var(--mono); font-size: 16px; font-weight: 700;
+  color: #fff; letter-spacing: -0.5px; z-index: 10;
+}
+.top-logo span { color: var(--cyan); }
+
+/* card */
+.unlock-card {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 440px;
+  margin: 0 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 48px 40px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 60px rgba(0,245,212,0.04);
+  animation: cardIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* lock icon */
+.lock-wrap {
+  display: flex; justify-content: center; margin-bottom: 32px;
+}
+.lock-circle {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--cyan-d); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  animation: lockPulse 2.5s ease-in-out infinite;
+}
+@keyframes lockPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(0,245,212,0.2); }
+  50%      { box-shadow: 0 0 0 16px rgba(0,245,212,0); }
+}
+
+.card-title {
+  font-size: 26px; font-weight: 800; color: #fff;
+  letter-spacing: -0.8px; text-align: center; margin-bottom: 8px;
+}
+.card-sub {
+  font-size: 13px; color: var(--muted2); text-align: center;
+  line-height: 1.6; margin-bottom: 32px;
+}
+
+.file-chip {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px; padding: 10px 14px;
+  margin-bottom: 28px;
+}
+.file-chip-icon { font-size: 20px; flex-shrink: 0; }
+.file-chip-name {
+  font-family: var(--mono); font-size: 11px; color: var(--text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1;
+}
+.file-chip-tag {
+  font-family: var(--mono); font-size: 9px; font-weight: 700;
+  background: var(--cyan); color: #06080e;
+  border-radius: 4px; padding: 2px 6px; flex-shrink: 0;
+}
+
+/* input */
+.input-label {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.5px; color: var(--muted2);
+  margin-bottom: 8px; display: block;
+}
+.input-row {
+  position: relative; display: flex; align-items: center; margin-bottom: 20px;
+}
+.input-icon-l {
+  position: absolute; left: 14px;
+  font-size: 15px; pointer-events: none; z-index: 1;
+}
+.code-input {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px 14px 14px 42px;
+  color: var(--text); font-family: var(--mono); font-size: 15px;
+  outline: none; letter-spacing: 1px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.code-input::placeholder { color: var(--muted); opacity: 0.4; letter-spacing: 0.5px; }
+.code-input:focus {
+  border-color: rgba(0,245,212,0.4);
+  box-shadow: 0 0 0 3px rgba(0,245,212,0.08);
+}
+
+/* btn */
+.unlock-btn {
+  width: 100%; padding: 15px;
+  background: var(--cyan); color: #06080e;
+  border: none; border-radius: 12px;
+  font-family: var(--sans); font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  letter-spacing: 0.1px;
+}
+.unlock-btn:hover {
+  background: #05dfc0;
+  box-shadow: 0 0 28px rgba(0,245,212,0.35), 0 4px 16px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+.unlock-btn:active { transform: translateY(0); }
+.unlock-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* no-code state */
+.no-code-box {
+  background: rgba(74,222,128,0.06);
+  border: 1px solid rgba(74,222,128,0.15);
+  border-radius: 10px; padding: 14px;
+  font-family: var(--mono); font-size: 12px; color: var(--green);
+  margin-bottom: 20px; text-align: center; line-height: 1.6;
+}
+
+/* status messages */
+.status-msg {
+  margin-top: 16px; padding: 12px 14px;
+  border-radius: 10px; font-family: var(--mono); font-size: 12px;
+  text-align: center; display: none; animation: fadeUp 0.3s ease;
+  line-height: 1.6;
+}
+.status-msg.show { display: block; }
+.status-msg.error { background: rgba(255,77,109,0.08); border: 1px solid rgba(255,77,109,0.2); color: var(--danger); }
+.status-msg.loading { background: var(--cyan-d); border: 1px solid var(--border); color: var(--cyan); }
+.status-msg.success { background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.2); color: var(--green); }
+
+/* result panel */
+.result-panel {
+  display: none; flex-direction: column; gap: 16px;
+  margin-top: 24px; padding-top: 24px;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.4s ease;
+}
+.result-panel.show { display: flex; }
+
+.result-title {
+  font-size: 15px; font-weight: 700; color: var(--green);
+  display: flex; align-items: center; gap: 8px;
+}
+
+.file-actions { display: flex; flex-direction: column; gap: 10px; }
+
+.action-btn {
+  width: 100%; padding: 13px;
+  border-radius: 10px; font-family: var(--sans);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; text-decoration: none;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  border: none;
+}
+.action-btn-primary {
+  background: var(--cyan); color: #06080e;
+}
+.action-btn-primary:hover { background: #05dfc0; box-shadow: 0 0 20px rgba(0,245,212,0.3); }
+
+.action-btn-ghost {
+  background: transparent; color: var(--muted2);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.action-btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.15); }
+
+/* spinner */
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(6,8,14,0.3);
+  border-top-color: #06080e;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* expiry warning */
+.expiry-warn {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--muted); text-align: center; margin-top: 20px;
+  letter-spacing: 0.3px;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(10px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="top-logo">dhruv<span>.</span></div>
+
+<div class="unlock-card" id="unlockCard">
+
+  <div class="lock-wrap">
+    <div class="lock-circle" id="lockIcon">🔐</div>
+  </div>
+
+  <h1 class="card-title" id="cardTitle">Unlock this file</h1>
+  <p class="card-sub" id="cardSub">Someone shared an encrypted file with you via dhruv.vault. Enter the secret code to decrypt and open it.</p>
+
+  <div class="file-chip" id="fileChip">
+    <div class="file-chip-icon" id="chipIcon">📄</div>
+    <div class="file-chip-name" id="chipName">Loading…</div>
+    <div class="file-chip-tag" id="chipTag">ENC</div>
+  </div>
+
+  <div id="codeSection">
+    <label class="input-label">🔑 Secret Decryption Code</label>
+    <div class="input-row">
+      <span class="input-icon-l">🔑</span>
+      <input class="code-input" id="codeInput" type="text"
+             placeholder="Enter the code you were given"
+             autocomplete="off" spellcheck="false">
+    </div>
+
+    <button class="unlock-btn" id="unlockBtn" onclick="attemptDecrypt()">
+      <span id="btnText">Decrypt & Open File</span>
+    </button>
+  </div>
+
+  <div class="no-code-box" id="noCodeBox" style="display:none">
+    ✓ This file has no secret code — opening it now…
+  </div>
+
+  <div class="status-msg" id="statusMsg"></div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-title">✅ File decrypted successfully</div>
+    <div class="file-actions">
+      <a class="action-btn action-btn-primary" id="openBtn" target="_blank">↗ Open / View File</a>
+      <a class="action-btn action-btn-ghost" id="downloadBtn" download>⬇ Download File</a>
+    </div>
+  </div>
+
+  <div class="expiry-warn" id="expiryWarn"></div>
+</div>
+
+<script>
+const params   = new URLSearchParams(location.search);
+const filename = params.get('file') || '';
+
+// ── setup file chip ──
+function setupChip() {
+  const raw  = filename.replace('.enc','').split('_').slice(1).join('_') || filename;
+  const ext  = raw.split('.').pop().toUpperCase().slice(0,6) || 'ENC';
+  const display = raw.length > 36 ? raw.slice(0,14) + '…' + raw.slice(-14) : raw;
+  const emojiMap = {
+    pdf:'📄', jpg:'🖼',jpeg:'🖼',png:'🖼',gif:'🖼',webp:'🖼',svg:'🖼',
+    mp4:'🎬',mov:'🎬',avi:'🎬',mkv:'🎬',
+    mp3:'🎵',wav:'🎵',flac:'🎵',
+    zip:'📦',rar:'📦',tar:'📦',gz:'📦',
+    doc:'📝',docx:'📝',txt:'📝',md:'📝',
+    xls:'📊',xlsx:'📊',csv:'📊',
+    ppt:'📊',pptx:'📊',
+    js:'💻',ts:'💻',py:'💻',html:'💻',css:'💻',json:'💻',
+  };
+  const emoji = emojiMap[raw.split('.').pop().toLowerCase()] || '📄';
+
+  document.getElementById('chipIcon').textContent = emoji;
+  document.getElementById('chipName').textContent = display || 'Encrypted file';
+  document.getElementById('chipTag').textContent  = ext;
+}
+
+// ── show status ──
+function showStatus(msg, type) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.className = `status-msg show ${type}`;
+}
+
+function hideStatus() {
+  document.getElementById('statusMsg').className = 'status-msg';
+}
+
+// ── attempt decrypt ──
+async function attemptDecrypt() {
+  const code = document.getElementById('codeInput')?.value?.trim() || '';
+  const btn  = document.getElementById('unlockBtn');
+  const txt  = document.getElementById('btnText');
+
+  btn.disabled = true;
+  txt.innerHTML = '<div class="spinner"></div> Decrypting…';
+  hideStatus();
+
+  const viewURL = `/view/${encodeURIComponent(filename)}?password=${encodeURIComponent(code)}`;
+
+  try {
+    const res = await fetch(viewURL);
+    const contentType = res.headers.get('content-type') || '';
+
+    if (!res.ok) {
+      throw new Error('Server error');
+    }
+
+    // check if it's a text error response
+    if (contentType.includes('text/html') || contentType.includes('text/plain')) {
+      const text = await res.text();
+      if (text.toLowerCase().includes('wrong password') || text.toLowerCase().includes('wrong')) {
+        showStatus('✗ Wrong code — double-check what was shared with you', 'error');
+        btn.disabled = false;
+        txt.textContent = 'Try Again';
+        return;
+      }
+      if (text.toLowerCase().includes('expired')) {
+        showStatus('✗ This file has expired and been deleted', 'error');
+        btn.disabled = false;
+        txt.textContent = 'File Expired';
+        return;
+      }
+    }
+
+    // success — show open/download buttons
+    showSuccess(viewURL, filename);
+
+  } catch(e) {
+    showStatus('✗ Could not reach the server', 'error');
+    btn.disabled = false;
+    txt.textContent = 'Try Again';
+  }
+}
+
+function showSuccess(viewURL, fname) {
+  // animate lock
+  const lock = document.getElementById('lockIcon');
+  lock.textContent = '🔓';
+  lock.style.background = 'rgba(74,222,128,0.1)';
+  lock.style.border = '1px solid rgba(74,222,128,0.2)';
+
+  document.getElementById('cardTitle').textContent = 'File unlocked!';
+  document.getElementById('cardSub').textContent = 'Your file has been decrypted. Open or download it below.';
+  document.getElementById('codeSection').style.display = 'none';
+
+  const openBtn = document.getElementById('openBtn');
+  const dlBtn   = document.getElementById('downloadBtn');
+  openBtn.href = viewURL;
+  dlBtn.href   = viewURL;
+
+  // try to set a better download filename
+  const raw = fname.replace('.enc','').split('_').slice(1).join('_') || fname;
+  dlBtn.setAttribute('download', raw);
+
+  document.getElementById('resultPanel').classList.add('show');
+}
+
+// ── no-code direct open ──
+async function autoOpen() {
+  const noCodeBox = document.getElementById('noCodeBox');
+  const codeSection = document.getElementById('codeSection');
+  noCodeBox.style.display = 'block';
+  codeSection.style.display = 'none';
+
+  const viewURL = `/view/${encodeURIComponent(filename)}`;
+
+  await new Promise(r => setTimeout(r, 1200));
+
+  try {
+    const res = await fetch(viewURL);
+    const text = await res.text();
+    if (text.toLowerCase().includes('expired')) {
+      noCodeBox.textContent = '✗ This file has expired and been deleted.';
+      noCodeBox.style.color = '#ff4d6d';
+      noCodeBox.style.background = 'rgba(255,77,109,0.06)';
+      noCodeBox.style.borderColor = 'rgba(255,77,109,0.2)';
+      return;
+    }
+    showSuccess(viewURL, filename);
+  } catch(e) {
+    noCodeBox.textContent = '✗ Could not reach the server.';
+  }
+}
+
+// ── enter key support ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') attemptDecrypt();
+});
+
+// ── init ──
+if (!filename) {
+  document.getElementById('cardTitle').textContent = 'Invalid link';
+  document.getElementById('cardSub').textContent = 'This link is missing a file reference. Ask the sender to reshare.';
+  document.getElementById('codeSection').style.display = 'none';
+  document.getElementById('fileChip').style.display = 'none';
+} else {
+  setupChip();
+  // if ?nocode=1 is in URL, skip code entry
+  if (params.get('nocode') === '1') {
+    autoOpen();
+  }
+}
+
+window.attemptDecrypt = attemptDecrypt;
+</script>
+</body>
+</html>
